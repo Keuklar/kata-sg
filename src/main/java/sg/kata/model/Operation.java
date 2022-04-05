@@ -16,6 +16,18 @@ public class Operation {
         this.amount = amount;
     }
 
+    public OperationType getOperationType() {
+        return operationType;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
     private void validateOperationParameters(OperationType operationType, LocalDate date, BigDecimal amount) {
         if (operationType == null || date == null || amount == null) {
             throw new IllegalArgumentException("All parameters must be provided");
