@@ -10,12 +10,16 @@ public class Operation {
     private BigDecimal amount;
 
     public Operation(OperationType operationType, LocalDate date, BigDecimal amount) {
-        if (operationType == null || date == null || amount == null) {
-            throw new IllegalArgumentException("All parameters must be provided");
-        }
+        validateOperationParameters(operationType, date, amount);
         this.operationType = operationType;
         this.date = date;
         this.amount = amount;
+    }
+
+    private void validateOperationParameters(OperationType operationType, LocalDate date, BigDecimal amount) {
+        if (operationType == null || date == null || amount == null) {
+            throw new IllegalArgumentException("All parameters must be provided");
+        }
     }
 
     @Override
