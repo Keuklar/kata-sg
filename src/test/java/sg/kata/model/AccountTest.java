@@ -11,17 +11,30 @@ class AccountTest {
 
     @Test
     void je_ne_peux_pas_creer_de_compte_sans_somme_de_depart() {
-        Assertions.assertThrows(Exception.class, () -> {
-            new Account(null);
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Account(null));
     }
 
     @Test
     void je_ne_peux_pas_creer_de_compte_avec_une_somme_de_depart_negative() {
-        Assertions.assertThrows(Exception.class, () -> {
-            new Account(new BigDecimal("-123"));
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Account(new BigDecimal("-123")));
     }
+
+    @Test
+    void je_ne_peux_pas_deposer_une_somme_d_argent_negative() {
+        // given
+        Account account = new Account(new BigDecimal("1000"));
+        // then
+        Assertions.assertThrows(IllegalArgumentException.class, () -> account.deposit(new BigDecimal("-20")));
+    }
+
+    @Test
+    void je_ne_peux_pas_retirer_une_somme_d_argent_negative() {
+        // given
+        Account account = new Account(new BigDecimal("1000"));
+        // then
+        Assertions.assertThrows(IllegalArgumentException.class, () -> account.withDraw(new BigDecimal("-20")));
+    }
+
 
     @Test
     void si_mon_solde_courant_est_de_1000_et_que_je_depose_20_mon_noveau_solde_est_1020() {

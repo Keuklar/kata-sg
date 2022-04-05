@@ -1,8 +1,9 @@
 package sg.kata.model;
 
+
 import java.math.BigDecimal;
 
-public class Account {
+public class Account  {
     private BigDecimal balance;
 
     public Account(BigDecimal initialAmount) {
@@ -17,11 +18,17 @@ public class Account {
     }
 
     public BigDecimal deposit(BigDecimal amount) {
+        if (amount == null || amount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Deposit amount is required and must be positive");
+        }
         this.balance = this.balance.add(amount);
         return this.balance;
     }
 
     public BigDecimal withDraw(BigDecimal amount) {
+        if (amount == null || amount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("WithDraw amount is required and must be positive");
+        }
         this.balance = this.balance.subtract(amount);
         return this.balance;
     }
